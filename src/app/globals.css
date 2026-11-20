@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* Rice paper, ink and cinnabar. Dark mode follows the system. */
+:root {
+  --bg: #f7f3ec;
+  --surface: #ffffff;
+  --surface-2: #f0eadf;
+  --line: #e3dacb;
+  --ink: #1f1a17;
+  --muted: #6f655b;
+  --accent: #b8322a;
+  --accent-ink: #ffffff;
+  --accent-soft: #f6e1dc;
+  --good: #2e7a4f;
+  --good-soft: #e0f0e6;
+  --warn: #a8701a;
+  --warn-soft: #f8ecd6;
+  --easy: #2c6f95;
+  --easy-soft: #dfedf5;
+  --grid: #e9b8b1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141210;
+    --surface: #1d1a17;
+    --surface-2: #282420;
+    --line: #36302a;
+    --ink: #f2ece3;
+    --muted: #a39889;
+    --accent: #e0594a;
+    --accent-ink: #1a0f0d;
+    --accent-soft: #3a1f1b;
+    --good: #5db27f;
+    --good-soft: #1c3025;
+    --warn: #e0a84a;
+    --warn-soft: #362a16;
+    --easy: #6fb3dc;
+    --easy-soft: #172b38;
+    --grid: #5a2f2a;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-easy: var(--easy);
+  --color-easy-soft: var(--easy-soft);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-hanzi: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --font-kai: "Kaiti SC", "STKaiti", "KaiTi", "AR PL UKai CN", "Noto Serif SC", "Songti SC", var(--font-hanzi);
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+/* Chinese text: right glyph shapes (simplified, not Japanese variants) on every OS. */
+.hz {
+  font-family: var(--font-hanzi);
+}
+.hz-kai {
+  font-family: var(--font-kai);
+}
+
+/* iOS zooms into inputs under 16px: keep form controls at 16px on phones. */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Drawing surfaces must not scroll or zoom the page under the finger. */
+.draw-surface {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* BlockNote: blend into the page. Its side gutter (54px) holds the drag handle on
+   desktop; phones have no hover menu, so the gutter matches the page padding. */
+.bn-container .bn-editor {
+  background: transparent;
+}
+@media (max-width: 767px) {
+  .bn-container .bn-editor {
+    padding-inline: 16px;
+  }
+}
+.bn-container {
+  --bn-colors-editor-background: transparent;
+  --bn-colors-editor-text: var(--ink);
+  --bn-font-family: var(--font-geist-sans), var(--font-hanzi), system-ui, sans-serif;
+}
